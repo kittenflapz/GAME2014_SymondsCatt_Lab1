@@ -7,6 +7,7 @@
  Revision History: 
  22/09/2020: File created as an amalgamation of several button manager scripts.
  23/09/2020: Added a slight delay using a coroutine to allow for audio feedback.
+ 12/10/2020: Added crossfade animations
  */
 
 
@@ -17,17 +18,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneMgmtButtons : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Animator transition;
+    public float transitionTime = 1f;
 
     public void OnStartButtonPressed()
     {
@@ -63,7 +55,11 @@ public class SceneMgmtButtons : MonoBehaviour
 
     private IEnumerator WaitForUIClickAndLoadScene(string sceneName)
     {
-        yield return new WaitForSeconds(0.5f); // Waiting for the UI clicking sound to finish playing before we load into the new scene
+        // Play animation
+        transition.SetTrigger("Start");
+
+        // Wait for it to stop playing
+        yield return new WaitForSeconds(transitionTime); // Waiting for the UI clicking sound to finish playing before we load into the new scene
 
         SceneManager.LoadScene(sceneName);
     }
