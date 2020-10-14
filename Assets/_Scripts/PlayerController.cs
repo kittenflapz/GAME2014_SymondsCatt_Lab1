@@ -21,12 +21,13 @@ public class PlayerController : MonoBehaviour
 
     public float horizontalBoundary;
     public float horizontalSpeed;
+    public float verticalSpeed;
     public float maxSpeed;
 
     public float leftTrack; // the x point on the screen that the player goes when player holds left of screen
     public float rightTrack;
 
-    public float gameInputVerticalCutoff;
+    public Transform gameInputVerticalCutoff;
     public float movementZoneStart;
 
     public Animator animator;
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 worldTouch = Camera.main.ScreenToWorldPoint(screenTouch.position);
 
-            if (worldTouch.y < gameInputVerticalCutoff)
+            if (worldTouch.y < gameInputVerticalCutoff.position.y)
             {
                 if (worldTouch.x > movementZoneStart)
                 {
@@ -96,7 +97,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-            // move the cat
+            // move the cat left or right
         if (touchesEnd != Vector3.zero) // player is touching screen
         {
             if(direction < 0)
@@ -119,6 +120,8 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(Mathf.Lerp(transform.position.x, 0.0f, 0.01f), transform.position.y); // go back to the middle
         }
 
+        // move the cat up
+        transform.position = new Vector2(transform.position.x, transform.position.y + verticalSpeed * Time.deltaTime);
     }
 
     private void _CheckBounds()
