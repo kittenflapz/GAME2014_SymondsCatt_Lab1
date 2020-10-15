@@ -8,6 +8,7 @@
  11/10/2020: File created as simple player controller
  12/10/2020: Bug fixing.
  12/10/2020: Changed areas of screen that are touchable as game input. Added attack audio.
+ 15/10/2020: Added handler for being stunned by enemy
  */
 
 using System.Collections;
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public AudioSource meow;
 
+    private bool isStunned;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,8 +47,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _Move();
-        _CheckBounds();
+        if (!isStunned)
+        { 
+            _Move(); 
+        }
 
     }
 
@@ -124,26 +129,22 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector2(transform.position.x, transform.position.y + verticalSpeed * Time.deltaTime);
     }
 
-    private void _CheckBounds()
-    {
-        // Check right bounds
-        if (transform.position.x >= horizontalBoundary)
-        {
-            transform.position = new Vector3(horizontalBoundary, transform.position.y);
-        }
-
-        // Check left bounds
-        if (transform.position.x <= -horizontalBoundary)
-        {
-            transform.position = new Vector3(-horizontalBoundary, transform.position.y);
-        }
-
-    }
-
     private void _Attack()
     {
         animator.SetTrigger("Attack");
         meow.Play();
+    }
+
+    public void Stunned()
+    {
+        StartCoroutine(OnStunned());
+    }
+
+    public IEnumerator OnStunned()
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(1);
+        isStunned = false;
     }
 
 }
