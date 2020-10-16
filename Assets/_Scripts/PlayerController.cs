@@ -10,6 +10,7 @@
  12/10/2020: Changed areas of screen that are touchable as game input. Added attack audio.
  15/10/2020: Added handler for being stunned by enemy
  16/10/2020: Added attack in radius function
+ 16/10/2020: Overhauled points system, time is now added to timer when player kills an enemy
  */
 
 using System.Collections;

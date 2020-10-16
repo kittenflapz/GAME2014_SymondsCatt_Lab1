@@ -134,10 +134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrownSquirrelEnemy (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
       value: 
@@ -475,10 +471,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrownSquirrelEnemy (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
       value: 
@@ -543,10 +535,6 @@ PrefabInstance:
     - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: m_Name
       value: BrownSquirrelEnemy (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
@@ -1050,10 +1038,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrownSquirrelEnemy (8)
       objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
       value: 
@@ -1267,7 +1251,7 @@ MonoBehaviour:
   timeSecondsLeft: 30
   speedModifier: 1
   timerFill: {fileID: 331905691}
-  timeAddedLabel: {fileID: 0}
+  timeAddedLabel: {fileID: 1423293186}
   timeUpLabel: {fileID: 1725079396}
   sceneManagement: {fileID: 156337518}
   player: {fileID: 908918140}
@@ -1586,7 +1570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1423293185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1596,14 +1580,14 @@ RectTransform:
   m_GameObject: {fileID: 1423293184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.6777, y: 2.6777, z: 2.6777}
   m_Children: []
   m_Father: {fileID: 1628268241}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.5, y: 0}
+  m_AnchoredPosition: {x: -38.3, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1423293186
@@ -6092,10 +6076,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrownSquirrelEnemy (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
       value: 
@@ -6160,10 +6140,6 @@ PrefabInstance:
     - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: m_Name
       value: BrownSquirrelEnemy (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
@@ -6614,10 +6590,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrownSquirrelEnemy (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
       value: 
@@ -6683,10 +6655,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BrownSquirrelEnemy (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
       value: 
@@ -6751,10 +6719,6 @@ PrefabInstance:
     - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: m_Name
       value: BrownSquirrelEnemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576736888176715910, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1576736888176715911, guid: 84a68f5089ed55e4ca215bc1abe2c954, type: 3}
       propertyPath: player
