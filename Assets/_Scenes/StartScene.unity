@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b527f1d9f90e345a9d6f5e0603f157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 0}
+  transition: {fileID: 5527606273284348600}
   transitionTime: 1
 --- !u!114 &156337519
 MonoBehaviour:

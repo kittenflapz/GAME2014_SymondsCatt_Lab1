@@ -9,6 +9,7 @@
  12/10/2020: Bug fixing.
  12/10/2020: Changed areas of screen that are touchable as game input. Added attack audio.
  15/10/2020: Added handler for being stunned by enemy
+ 16/10/2020: Added attack in radius function
  */
 
 using System.Collections;
@@ -17,41 +18,60 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D m_rigidBody;
     private Vector3 touchesEnd = Vector3.zero;
 
-    public float horizontalBoundary;
-    public float horizontalSpeed;
-    public float verticalSpeed;
-    public float maxSpeed;
+    [SerializeField]
+    private float horizontalBoundary;
 
-    public float leftTrack; // the x point on the screen that the player goes when player holds left of screen
-    public float rightTrack;
+    [SerializeField]
+    private float horizontalSpeed;
+
+    [SerializeField]
+    private float verticalSpeed;
+
+    [SerializeField]
+    private float maxSpeed;
+
+    [SerializeField]
+    private float attackRadius;
+
+    [SerializeField]
+    private float leftTrack; // the x point on the screen that the player goes when player holds left of screen
+
+    [SerializeField]
+    private float rightTrack;
 
     public Transform gameInputVerticalCutoff;
     public float movementZoneStart;
 
     public Animator animator;
     public AudioSource meow;
+    
 
     private bool isStunned;
+    private bool isDead;
+    private BoxCollider2D playerCollider;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        m_rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         meow = GetComponent<AudioSource>();
+        playerCollider = GetComponentInChildren<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isStunned)
-        { 
-            _Move(); 
+        if (!isDead)
+        {
+            if (!isStunned)
+            {
+                _Move();
+            }
         }
-
     }
 
     private void _Move()
@@ -131,13 +151,32 @@ public class PlayerController : MonoBehaviour
 
     private void _Attack()
     {
+        // Play the attack animation
         animator.SetTrigger("Attack");
+
+        // Play the attack sound
         meow.Play();
+
+        // Create a layer mask for enemies (must put enemies on 'Enemy' layer!)
+        LayerMask mask = LayerMask.GetMask("Enemy");
+
+        // Check a circle around the player and get all enemy colliders overlapping the circle
+        Collider2D[] collidersInAttackRadius = Physics2D.OverlapCircleAll(transform.position, attackRadius, mask);
+
+        foreach(Collider2D collider in collidersInAttackRadius)
+        {
+            Destroy(collider.gameObject);
+        }
     }
 
     public void Stunned()
     {
         StartCoroutine(OnStunned());
+    }
+
+    public void Kill()
+    {
+        isDead = true;
     }
 
     public IEnumerator OnStunned()

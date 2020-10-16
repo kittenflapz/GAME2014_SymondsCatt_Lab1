@@ -1427,6 +1427,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crossfade
       objectReference: {fileID: 0}
+    - target: {fileID: 1511842413207648994, guid: 60dd3ccc2363c674d9ed98e1155e5a42, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3888642021687825190, guid: 60dd3ccc2363c674d9ed98e1155e5a42, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -8,6 +8,7 @@
  22/09/2020: File created as an amalgamation of several button manager scripts.
  23/09/2020: Added a slight delay using a coroutine to allow for audio feedback.
  12/10/2020: Added crossfade animations
+ 16/10/2020: Added GameOver functionality
  */
 
 
@@ -34,7 +35,7 @@ public class SceneMgmtButtons : MonoBehaviour
         //Debug.Log("End Button Pressed");
         //SceneManager.LoadScene("EndScene");
 
-        StartCoroutine(WaitForUIClickAndLoadScene("EndScene"));
+        StartCoroutine(WaitForUIClickAndLoadScene("GameOverScene"));
     }
 
     public void OnBackButtonPressed()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1576736888176715911}
   - component: {fileID: 1653274149}
   - component: {fileID: 1653274150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BrownSquirrelEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
