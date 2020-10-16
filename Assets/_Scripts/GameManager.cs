@@ -7,6 +7,7 @@
  Revision History: 
  14/10/2020: File created, timer function implemented
  16/10/2020: Created time up and game over function
+ 16/10/2020: Created AddTime function
  */
 
 using System.Collections;
@@ -22,16 +23,24 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float timeSecondsLeft;
 
+    [SerializeField]
+    private float speedModifier = 1.0f;
+
     private float totalTime;
     private float timeLeft;
 
+    private Animator timerAnim;
+
     public Image timerFill;
+    public TextMeshProUGUI timeAddedLabel;
+
     public TextMeshProUGUI timeUpLabel;
     public SceneMgmtButtons sceneManagement;
     public PlayerController player;
 
     private void Start()
     {
+        timerAnim = timerFill.GetComponent<Animator>();
         totalTime = totalSeconds * 1000;
         timeLeft = timeSecondsLeft * 1000;
     }
@@ -45,13 +54,29 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            ApplySpeedModifiers();
             UpdateTimer();
+        }
+
+    }
+
+    void ApplySpeedModifiers()
+    {
+        if (player.BeingAttacked)
+        {
+            speedModifier = 2.0f;
+            timerAnim.SetBool("spedUp", true);
+        }
+        else
+        {
+            speedModifier = 1.0f;
+            timerAnim.SetBool("spedUp", false);
         }
     }
 
     void UpdateTimer()
     {
-        timeLeft -= Time.time;
+        timeLeft -= Time.time * speedModifier;
 
         timerFill.fillAmount = timeLeft / totalTime;
     }
@@ -61,7 +86,6 @@ public class GameManager : MonoBehaviour
         timeUpLabel.gameObject.SetActive(true);
         StartCoroutine(TimeUpCoro());
         player.Kill();
-        
     }
 
     IEnumerator TimeUpCoro()
@@ -75,5 +99,19 @@ public class GameManager : MonoBehaviour
         sceneManagement.OnNextButtonPressed();
     }
 
-  
+    public void AddTime(int secondsToAdd)
+    {
+        timeLeft += secondsToAdd * 1000;
+        timeAddedLabel.SetText("+" + secondsToAdd.ToString());
+       StartCoroutine(TurnOnTimeLabelForSeconds(1.5f));
+    }
+
+    IEnumerator TurnOnTimeLabelForSeconds(float seconds)
+    {
+        timeAddedLabel.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        timeAddedLabel.gameObject.SetActive(false);
+    }
+
+
 }

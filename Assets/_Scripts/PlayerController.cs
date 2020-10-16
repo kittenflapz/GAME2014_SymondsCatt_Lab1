@@ -41,17 +41,34 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float rightTrack;
 
+    private int enemiesInRadius;
+
+    public SpriteRenderer attackRadiusIndicator;
+
     public Transform gameInputVerticalCutoff;
     public float movementZoneStart;
 
     public Animator animator;
     public AudioSource meow;
-    
+
+    private bool beingAttacked;
+    public bool BeingAttacked
+    {
+        get
+        {
+            return beingAttacked;
+        }
+        set
+        {
+            beingAttacked = value;
+        }
+    }
 
     private bool isStunned;
     private bool isDead;
     private BoxCollider2D playerCollider;
 
+    public GameManager gameManager;
 
 
     // Start is called before the first frame update
@@ -60,6 +77,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         meow = GetComponent<AudioSource>();
         playerCollider = GetComponentInChildren<BoxCollider2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -67,14 +85,38 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDead)
         {
-            if (!isStunned)
-            {
-                _Move();
-            }
+           CheckIfEnemiesInRadius();
+           Move();
         }
     }
 
-    private void _Move()
+    private void CheckIfEnemiesInRadius()
+    {
+        if (enemiesInRadius > 0)
+        {
+            beingAttacked = true;
+        }
+        else
+        {
+            beingAttacked = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            enemiesInRadius++;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            enemiesInRadius--;
+        }
+    }
+    private void Move()
     {
         float direction = 0.0f;
 
@@ -98,7 +140,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    _Attack();
+                    Attack();
                 }
                 
             }
@@ -118,7 +160,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _Attack();
+            Attack();
         }
 
 
@@ -149,7 +191,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector2(transform.position.x, transform.position.y + verticalSpeed * Time.deltaTime);
     }
 
-    private void _Attack()
+    private void Attack()
     {
         // Play the attack animation
         animator.SetTrigger("Attack");
@@ -166,24 +208,25 @@ public class PlayerController : MonoBehaviour
         foreach(Collider2D collider in collidersInAttackRadius)
         {
             Destroy(collider.gameObject);
+            gameManager.AddTime(3);
         }
     }
 
-    public void Stunned()
-    {
-        StartCoroutine(OnStunned());
-    }
+    //public void Stunned()
+    //{
+    //    StartCoroutine(OnStunned());
+    //}
 
     public void Kill()
     {
         isDead = true;
     }
 
-    public IEnumerator OnStunned()
-    {
-        isStunned = true;
-        yield return new WaitForSeconds(1);
-        isStunned = false;
-    }
+    //public IEnumerator OnStunned()
+    //{
+    //    isStunned = true;
+    //    yield return new WaitForSeconds(1);
+    //    isStunned = false;
+    //}
 
 }

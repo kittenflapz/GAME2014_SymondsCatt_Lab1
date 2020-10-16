@@ -6,11 +6,13 @@
  Description: Player controller script to parse user input and move the player
  Revision History: 
  11/10/2020: File created as enemy AI controller with detection and follow
+ 16/10/2020: Removed collision detection from enemy and put it in player
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SquirrelEnemy : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class SquirrelEnemy : MonoBehaviour
     private float moveSpeed = 1f;
     [SerializeField]
     private float stunDistance = 16f;
+
+    UnityEvent enemyInPlayerRadius;
 
     public PlayerController player;
     public Transform target;
@@ -48,17 +52,6 @@ public class SquirrelEnemy : MonoBehaviour
     {
         transform.position += target.normalized * moveSpeed * Time.deltaTime;
         transform.up = -(target - transform.position);
-    }
-
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("colliding");
-        if (collision.gameObject.name == "PlayerCollider")
-        {
-            PlayerController cat = collision.GetComponentInParent<PlayerController>();
-            cat.Stunned();
-        }
     }
 
 }
