@@ -2,13 +2,14 @@
  Filename: GameManager.cs
  Author: Catt Symonds
  Student Number: 101209214
- Date Last Modified: 14/10/2020
+ Date Last Modified: 17/10/2020
  Description: All base game management
  Revision History: 
  14/10/2020: File created, timer function implemented
  16/10/2020: Created time up and game over function
  16/10/2020: Created AddTime function
  17/10/2020: Debugged timer visual so that if you get extra time it recalculates rather than just looking full
+ 17/10/2020: Saving/loading of time left
  */
 
 using System.Collections;
@@ -40,9 +41,12 @@ public class GameManager : MonoBehaviour
     public SceneMgmtButtons sceneManagement;
     public PlayerController player;
 
+    private ScoreKeeper scoreKeeper;
+
     private void Start()
     {
         timerAnim = timerFill.GetComponent<Animator>();
+        scoreKeeper = GameObject.Find("ScoreKeeper").GetComponent<ScoreKeeper>();
         totalTime = totalSeconds * 1000;
         timeLeft = timeSecondsLeft * 1000;
     }
@@ -98,6 +102,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
+        scoreKeeper.SaveTimeLeft(timeLeft);
         sceneManagement.OnNextButtonPressed();
     }
 

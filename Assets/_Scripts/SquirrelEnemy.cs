@@ -2,7 +2,7 @@
  Filename: SquirrelEnemy.cs
  Author: Catt Symonds
  Student Number: 101209214
- Date Last Modified: 15/10/2020
+ Date Last Modified: 16/10/2020
  Description: Player controller script to parse user input and move the player
  Revision History: 
  11/10/2020: File created as enemy AI controller with detection and follow

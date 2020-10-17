@@ -2,7 +2,7 @@
  Filename: PlayerController.cs
  Author: Catt Symonds
  Student Number: 101209214
- Date Last Modified: 12/10/2020
+ Date Last Modified: 17/10/2020
  Description: Player controller script to parse user input and move the player
  Revision History: 
  11/10/2020: File created as simple player controller
@@ -13,6 +13,7 @@
  16/10/2020: Overhauled points system, time is now added to timer when player kills an enemy
  17/10/2020: Added cooldown to attack
  17/10/2020: Added treat pickups
+ 17/10/2020: Added PlayerPrefs saving using new ScoreKeeper.cs script
  */
 
 using System.Collections;
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private bool beingAttacked;
 
+   
     public bool BeingAttacked
     {
         get
@@ -82,14 +84,20 @@ public class PlayerController : MonoBehaviour
 
    
     // Misc
-    private bool isStunned;
-    private bool isDead;
     private BoxCollider2D playerCollider;
     [SerializeField]
     private float treatRadius;
 
-    public GameManager gameManager;
 
+    // Game management
+    public GameManager gameManager;
+    private bool isDead;
+
+
+    // Saving/Loading
+    public ScoreKeeper scoreKeeper;
+    private int squirrelsSpooked = 0;
+    private int treatsEaten = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +106,7 @@ public class PlayerController : MonoBehaviour
         meow = GetComponent<AudioSource>();
         playerCollider = GetComponentInChildren<BoxCollider2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        scoreKeeper = GameObject.Find("ScoreKeeper").GetComponent<ScoreKeeper>();
     }
 
     // Update is called once per frame
@@ -234,6 +243,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collider.gameObject);
             gameManager.AddTime(3);
+            squirrelsSpooked++;
         }
     }
 
@@ -245,6 +255,8 @@ public class PlayerController : MonoBehaviour
     public void Kill()
     {
         isDead = true;
+        scoreKeeper.SaveSquirrelsSpooked(squirrelsSpooked);
+        scoreKeeper.SaveTreatsEaten(treatsEaten);
     }
 
     public void TreatCheck()
@@ -257,6 +269,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collider.gameObject);
             gameManager.AddTime(5);
+            treatsEaten++;
         }
 
     }
