@@ -12,6 +12,7 @@
  16/10/2020: Added attack in radius function
  16/10/2020: Overhauled points system, time is now added to timer when player kills an enemy
  17/10/2020: Added cooldown to attack
+ 17/10/2020: Added treat pickups
  */
 
 using System.Collections;
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour
     private bool isStunned;
     private bool isDead;
     private BoxCollider2D playerCollider;
+    [SerializeField]
+    private float treatRadius;
 
     public GameManager gameManager;
 
@@ -104,6 +107,7 @@ public class PlayerController : MonoBehaviour
         {
            CheckIfEnemiesInRadius();
            ParseInput();
+           TreatCheck();
         }
     }
 
@@ -241,6 +245,20 @@ public class PlayerController : MonoBehaviour
     public void Kill()
     {
         isDead = true;
+    }
+
+    public void TreatCheck()
+    {
+        LayerMask mask = LayerMask.GetMask("Treat");
+
+        // Check a circle around the player and get all treat colliders overlapping the circle
+        Collider2D[] collidersInTreatRadius= Physics2D.OverlapCircleAll(transform.position, treatRadius, mask);
+        foreach(Collider2D collider in collidersInTreatRadius)
+        {
+            Destroy(collider.gameObject);
+            gameManager.AddTime(5);
+        }
+
     }
 
     //public IEnumerator OnStunned()
