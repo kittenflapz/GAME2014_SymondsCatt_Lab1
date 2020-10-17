@@ -8,6 +8,7 @@
  14/10/2020: File created, timer function implemented
  16/10/2020: Created time up and game over function
  16/10/2020: Created AddTime function
+ 17/10/2020: Debugged timer visual so that if you get extra time it recalculates rather than just looking full
  */
 
 using System.Collections;
@@ -15,6 +16,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -102,6 +104,10 @@ public class GameManager : MonoBehaviour
     public void AddTime(int secondsToAdd)
     {
         timeLeft += secondsToAdd * 1000;
+        if (timeLeft > totalTime)
+        {
+            totalTime = timeLeft;
+        }
         timeAddedLabel.SetText("+" + secondsToAdd.ToString());
        StartCoroutine(TurnOnTimeLabelForSeconds(1.5f));
     }

@@ -11,6 +11,7 @@
  15/10/2020: Added handler for being stunned by enemy
  16/10/2020: Added attack in radius function
  16/10/2020: Overhauled points system, time is now added to timer when player kills an enemy
+ 17/10/2020: Added cooldown to attack
  */
 
 using System.Collections;
@@ -20,6 +21,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Vector3 touchesEnd = Vector3.zero;
+
+    // Movement
 
     [SerializeField]
     private float horizontalBoundary;
@@ -34,25 +37,29 @@ public class PlayerController : MonoBehaviour
     private float maxSpeed;
 
     [SerializeField]
-    private float attackRadius;
-
-    [SerializeField]
     private float leftTrack; // the x point on the screen that the player goes when player holds left of screen
 
     [SerializeField]
     private float rightTrack;
 
-    private int enemiesInRadius;
-
-    public SpriteRenderer attackRadiusIndicator;
-
     public Transform gameInputVerticalCutoff;
     public float movementZoneStart;
 
-    public Animator animator;
-    public AudioSource meow;
+    // Attacks
+
+    [SerializeField]
+    private float attackRadius;
+    [SerializeField]
+    private float attackCooldown;
+    private float nextAttackTime;
+
+    // Enemy detection
+
+    private int enemiesInRadius;
+    public SpriteRenderer attackRadiusIndicator;
 
     private bool beingAttacked;
+
     public bool BeingAttacked
     {
         get
@@ -65,6 +72,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Animation
+
+    public Animator animator;
+
+    // Sound
+    public AudioSource meow;
+
+   
+    // Misc
     private bool isStunned;
     private bool isDead;
     private BoxCollider2D playerCollider;
@@ -87,7 +103,7 @@ public class PlayerController : MonoBehaviour
         if (!isDead)
         {
            CheckIfEnemiesInRadius();
-           Move();
+           ParseInput();
         }
     }
 
@@ -117,7 +133,7 @@ public class PlayerController : MonoBehaviour
             enemiesInRadius--;
         }
     }
-    private void Move()
+    private void ParseInput()
     {
         float direction = 0.0f;
 
@@ -141,7 +157,11 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    Attack();
+                    if (Time.time > nextAttackTime)
+                    {
+                        nextAttackTime = Time.time + attackCooldown;
+                        Attack();
+                    }
                 }
                 
             }
