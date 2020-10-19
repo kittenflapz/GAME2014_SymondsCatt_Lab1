@@ -1,5 +1,5 @@
 ﻿/* 
- Filename: PlayerController.cs
+ Filename: GameOverScoreLoader.cs
  Author: Catt Symonds
  Student Number: 101209214
  Date Last Modified: 17/10/2020

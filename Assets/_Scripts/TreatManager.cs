@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿/* 
+ Filename:TreatManager.cs
+ Author: Catt Symonds
+ Student Number: 101209214
+ Date Last Modified: 17/10/2020
+ Description: For managing an object pool of treats
+ Revision History: 
+ 19/10/2020: File created
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
