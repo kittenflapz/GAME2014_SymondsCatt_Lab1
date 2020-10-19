@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D playerCollider;
     [SerializeField]
     private float treatRadius;
+    public TreatManager treatManager;
 
 
     // Game management
@@ -107,6 +108,7 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponentInChildren<BoxCollider2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         scoreKeeper = GameObject.Find("ScoreKeeper").GetComponent<ScoreKeeper>();
+        treatManager = GameObject.Find("TreatManager").GetComponent<TreatManager>();
     }
 
     // Update is called once per frame
@@ -267,7 +269,10 @@ public class PlayerController : MonoBehaviour
         Collider2D[] collidersInTreatRadius= Physics2D.OverlapCircleAll(transform.position, treatRadius, mask);
         foreach(Collider2D collider in collidersInTreatRadius)
         {
-            Destroy(collider.gameObject);
+            treatManager.ReturnTreat(collider.gameObject);
+            // A treat has been destroyed, so spawn a new one at least two screen's height away from the character
+            Vector2 newTreatPos = new Vector2(Random.Range(-2f, 2f), Random.Range(transform.position.y + 7f, transform.position.y + 14f));
+            GameObject newTreat = treatManager.GetTreat(newTreatPos);
             gameManager.AddTime(5);
             treatsEaten++;
         }
