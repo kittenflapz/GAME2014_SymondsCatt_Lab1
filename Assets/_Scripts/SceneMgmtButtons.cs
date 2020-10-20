@@ -22,6 +22,8 @@ public class SceneMgmtButtons : MonoBehaviour
     public Animator transition;
     public float transitionTime = 1f;
 
+
+    // Changes scene to play scene
     public void OnStartButtonPressed()
     {
         //Debug.Log("Start Button Pressed");
@@ -30,6 +32,9 @@ public class SceneMgmtButtons : MonoBehaviour
         StartCoroutine(WaitForUIClickAndLoadScene("PlayScene"));
     }
 
+
+    // Changes scene to GameOver scene
+
     public void OnNextButtonPressed()
     {
         //Debug.Log("End Button Pressed");
@@ -37,6 +42,8 @@ public class SceneMgmtButtons : MonoBehaviour
 
         StartCoroutine(WaitForUIClickAndLoadScene("GameOverScene"));
     }
+
+    // Changes scene to win scene
     public void OnWin()
     {
         //Debug.Log("End Button Pressed");
@@ -45,7 +52,7 @@ public class SceneMgmtButtons : MonoBehaviour
         StartCoroutine(WaitForUIClickAndLoadScene("LevelWinScreen"));
     }
 
-
+    // Changes scene to start scene (not actually used right now)
     public void OnBackButtonPressed()
     {
         //Debug.Log("Back Button Pressed");
@@ -53,6 +60,8 @@ public class SceneMgmtButtons : MonoBehaviour
 
         StartCoroutine(WaitForUIClickAndLoadScene("StartScene"));
     }
+
+    //  Changes scene to instructions scene
     public void OnInstructionsButtonPressed()
     {
        // Debug.Log("Instructions Button Pressed");
@@ -62,6 +71,7 @@ public class SceneMgmtButtons : MonoBehaviour
     }
 
 
+    // Waits a lil bit before loading the scene passed to it. Also handles scene transition
     private IEnumerator WaitForUIClickAndLoadScene(string sceneName)
     {
         // Play animation

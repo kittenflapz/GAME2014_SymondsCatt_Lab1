@@ -122,6 +122,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // To see if there are enemies nearby - changes timer speed
     private void CheckIfEnemiesInRadius()
     {
         if (enemiesInRadius > 0)
@@ -134,6 +135,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Increments an int if there are enemies nearby. This is to prevent buggy behaviour when using a bool, since if 
+    // any enemy exits the radius, the player would no longer register any enemies even if there are still enemies
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -141,6 +144,8 @@ public class PlayerController : MonoBehaviour
             enemiesInRadius++;
         }
     }
+
+    // Decrements same int
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -148,6 +153,9 @@ public class PlayerController : MonoBehaviour
             enemiesInRadius--;
         }
     }
+
+
+    // Parsing touch input from the player
     private void ParseInput()
     {
         float direction = 0.0f;
@@ -227,6 +235,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector2(transform.position.x, transform.position.y + verticalSpeed * Time.deltaTime);
     }
 
+    // Handles attack with animation, sound, and checking whether the attack hits anything
     private void Attack()
     {
         // Play the attack animation
@@ -254,6 +263,8 @@ public class PlayerController : MonoBehaviour
     //    StartCoroutine(OnStunned());
     //}
 
+        // Kills the player
+
     public void Kill()
     {
         isDead = true;
@@ -261,6 +272,8 @@ public class PlayerController : MonoBehaviour
         scoreKeeper.SaveTreatsEaten(treatsEaten);
     }
 
+
+    // Checks if there are treats in the player's treat-eating radius
     public void TreatCheck()
     {
         LayerMask mask = LayerMask.GetMask("Treat");

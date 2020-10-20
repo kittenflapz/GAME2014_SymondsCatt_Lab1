@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    // Speeds up timer if the player is being attacked
     void ApplySpeedModifiers()
     {
         if (player.BeingAttacked)
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Regular update to timer visual
     void UpdateTimer()
     {
         timeLeft -= Time.time * speedModifier;
@@ -89,6 +91,7 @@ public class GameManager : MonoBehaviour
         timerFill.fillAmount = timeLeft / totalTime;
     }
 
+    //  Handles starting game over
     void TimeUp()
     {
         timeUpLabel.gameObject.SetActive(true);
@@ -96,24 +99,29 @@ public class GameManager : MonoBehaviour
         player.Kill();
     }
 
+    // Waits before playing gameover so that the player has time to see the timeup message!
     IEnumerator TimeUpCoro()
     {
         yield return new WaitForSeconds(1.5f);
         GameOver();
     }
 
+    // Changes scene
     void GameOver()
     { 
         scoreKeeper.SaveTimeLeft(timeLeft);
         sceneManagement.OnNextButtonPressed();
     }
 
+    // Changes scene to win scene
     public void Win()
     {
         //scoreKeeper.SaveTimeLeft(timeLeft);
         timeUpLabel.GetComponent<TextMeshProUGUI>().SetText("You win!");
         sceneManagement.OnWin();
     }
+
+    // Adds time to timer (when player picks up treats or kills enemy)
 
     public void AddTime(int secondsToAdd)
     {
@@ -127,6 +135,8 @@ public class GameManager : MonoBehaviour
        StartCoroutine(TurnOnTimeLabelForSeconds(1.5f));
     }
 
+
+    // Turns on the label showing time added for the second amount given 
     IEnumerator TurnOnTimeLabelForSeconds(float seconds)
     {
         timeAddedLabel.gameObject.SetActive(true);

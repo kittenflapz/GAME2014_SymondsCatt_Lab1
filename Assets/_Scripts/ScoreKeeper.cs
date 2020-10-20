@@ -32,6 +32,8 @@ public class ScoreKeeper : MonoBehaviour
             PlayerPrefs.SetString("TimeLeftHighScore", 0f.ToString());
         }
     }
+
+    // Save an int to a string.
     public void SaveSquirrelsSpooked(int squirrelsSpooked)
     {
         // Save in latest data string
@@ -54,6 +56,8 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
+
+    // Save an int to a string.
     public void SaveTreatsEaten(int treatsEaten)
     {
         // Save in latest data string
@@ -76,6 +80,7 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
+    // Save a float to a string
     public void SaveTimeLeft(float timeLeft)
     {
         // Save in latest data string
@@ -98,6 +103,7 @@ public class ScoreKeeper : MonoBehaviour
         }
     }
 
+    // Load an int from a string
     public int LoadTreatsEatenHS()
     {
         HSCheckString = PlayerPrefs.GetString("SquirrelsSpookedHighScore");
@@ -106,6 +112,7 @@ public class ScoreKeeper : MonoBehaviour
         return existingHighScore;
     }
 
+    // Load an int from a string
     public int LoadSquirrelsSpookedHS()
     {
         HSCheckString = PlayerPrefs.GetString("SquirrelsSpookedHighScore");
@@ -114,6 +121,7 @@ public class ScoreKeeper : MonoBehaviour
         return existingHighScore;
     }
 
+    // Load a float from a string
     public float LoadTimeLeftHS()
     {
         HSCheckString = PlayerPrefs.GetString("TimeLeftHighScore");

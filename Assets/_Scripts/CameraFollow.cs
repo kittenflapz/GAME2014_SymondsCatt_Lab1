@@ -16,6 +16,8 @@ public class CameraFollow : MonoBehaviour
 {
     public GameObject player;
     public Vector3 offset;
+
+    // Ensures that the camera always follows the player on the y axis without moving on the x axis.
     void Update()
     {
         Vector3 position = transform.position;
