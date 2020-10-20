@@ -34,6 +34,7 @@ public class SquirrelEnemy : MonoBehaviour
         CheckDistance();
     }
 
+    // Checks distance from squirrel to player
     void CheckDistance()
     {
         Vector3 dir = target.position - transform.position;
@@ -48,6 +49,7 @@ public class SquirrelEnemy : MonoBehaviour
         }
     }
 
+    // Walks to player
     private void MoveToTarget(Vector3 target)
     {
         transform.position += target.normalized * moveSpeed * Time.deltaTime;

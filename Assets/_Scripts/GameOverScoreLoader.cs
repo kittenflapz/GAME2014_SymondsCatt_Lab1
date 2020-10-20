@@ -21,6 +21,8 @@ public class GameOverScoreLoader : MonoBehaviour
     ScoreKeeper scoreKeeper;
 
     // Start is called before the first frame update
+
+        // Loads scores at end of game
     void Start()
     {
         scoreKeeper = GameObject.Find("ScoreKeeper").GetComponent<ScoreKeeper>();
