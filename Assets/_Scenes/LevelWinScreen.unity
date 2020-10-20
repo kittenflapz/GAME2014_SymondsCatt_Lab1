@@ -897,7 +897,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME OVER :(
+  m_text: YOU WON!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd81623348af1ce4396b7328863367c1, type: 2}
   m_sharedMaterial: {fileID: -492292226780730014, guid: fd81623348af1ce4396b7328863367c1, type: 2}
@@ -1772,7 +1772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1511842413207648994, guid: 60dd3ccc2363c674d9ed98e1155e5a42, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3888642021687825190, guid: 60dd3ccc2363c674d9ed98e1155e5a42, type: 3}
       propertyPath: m_LocalPosition.x

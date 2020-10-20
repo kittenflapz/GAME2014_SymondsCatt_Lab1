@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
             // A treat has been destroyed, so spawn a new one at least two screen's height away from the character
             Vector2 newTreatPos = new Vector2(Random.Range(-2f, 2f), Random.Range(transform.position.y + 7f, transform.position.y + 14f));
             GameObject newTreat = treatManager.GetTreat(newTreatPos);
-            gameManager.AddTime(5);
+            gameManager.AddTime(10);
             treatsEaten++;
         }
 

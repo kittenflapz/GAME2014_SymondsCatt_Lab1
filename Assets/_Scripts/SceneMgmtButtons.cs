@@ -37,6 +37,14 @@ public class SceneMgmtButtons : MonoBehaviour
 
         StartCoroutine(WaitForUIClickAndLoadScene("GameOverScene"));
     }
+    public void OnWin()
+    {
+        //Debug.Log("End Button Pressed");
+        //SceneManager.LoadScene("EndScene");
+
+        StartCoroutine(WaitForUIClickAndLoadScene("LevelWinScreen"));
+    }
+
 
     public void OnBackButtonPressed()
     {

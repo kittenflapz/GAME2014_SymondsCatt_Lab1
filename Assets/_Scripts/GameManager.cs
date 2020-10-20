@@ -64,13 +64,14 @@ public class GameManager : MonoBehaviour
             UpdateTimer();
         }
 
+
     }
 
     void ApplySpeedModifiers()
     {
         if (player.BeingAttacked)
         {
-            speedModifier = 2.0f;
+            speedModifier = 2.5f;
             timerAnim.SetBool("spedUp", true);
         }
         else
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
     void UpdateTimer()
     {
         timeLeft -= Time.time * speedModifier;
+ 
 
         timerFill.fillAmount = timeLeft / totalTime;
     }
@@ -101,14 +103,22 @@ public class GameManager : MonoBehaviour
     }
 
     void GameOver()
-    {
+    { 
         scoreKeeper.SaveTimeLeft(timeLeft);
         sceneManagement.OnNextButtonPressed();
+    }
+
+    public void Win()
+    {
+        //scoreKeeper.SaveTimeLeft(timeLeft);
+        timeUpLabel.GetComponent<TextMeshProUGUI>().SetText("You win!");
+        sceneManagement.OnWin();
     }
 
     public void AddTime(int secondsToAdd)
     {
         timeLeft += secondsToAdd * 1000;
+        //totalTime+= secondsToAdd * 1000;
         if (timeLeft > totalTime)
         {
             totalTime = timeLeft;
